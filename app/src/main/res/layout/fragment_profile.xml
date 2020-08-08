@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".intro.ui.home.ProfileFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="260dp"
+            android:layout_height="87dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Укажите как вас представить доверенным контактам в электронном письме"
+            android:textAlignment="center"
+            android:textColor="#616161"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="249dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="4dp"
+            android:width="250dp"
+            android:fontFamily="@font/roboto"
+            android:text="Не обязательно использовать настоящее имя: главное, чтобы контакты смогли Вас идентифицировать"
+            android:textAlignment="textStart"
+            android:textColor="#AAAAAA"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.512"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:width="250dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="КАК ВАС ПРЕДСТАВИТЬ"
+            android:textAlignment="viewStart"
+            android:textColor="#0D0D0D"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.510
+"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <EditText
+            android:id="@+id/editTextTextMultiLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:width="250dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <Button
+            android:id="@+id/button_first3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:text="@string/previous"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button_first2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/button_first2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:backgroundTint="#2979FF"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/next"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/roboto_light"
+            android:text="3/4"
+            android:textColor="#616161"
+            app:layout_constraintBottom_toTopOf="@+id/button_first2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="103dp"
+            android:layout_height="14dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/indicator3"
+            app:layout_constraintBottom_toTopOf="@+id/textView9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

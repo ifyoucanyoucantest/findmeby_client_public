@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.findmeby.client">
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <receiver
+            android:name=".receiver.LocationPermissionsReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+
+        <service
+            android:name=".service.BackgroundOfflineService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".service.RebuttonService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <receiver
+            android:name=".receiver.RedButtonAlarmReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name=".intro.IntroMainActivity"
+            android:label="@string/title_activity_intro_main"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".SplashActivity_">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ContactItemActivity_" />
+        <activity android:name=".HomeActivity_" />
+        <activity android:name=".ContactsActivity_" />
+        <activity
+            android:name=".intro.PermissionsIntro"
+            android:label="FindMeBY intro" />
+
+        <receiver
+            android:name=".receiver.StartMyServiceAtBootReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:label="StartMyServiceAtBootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".service.BootCompletedJobIntentService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
+
+</manifest>

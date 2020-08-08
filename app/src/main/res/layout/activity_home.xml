@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/alarm"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_margin="50dp"
+        android:padding="30dp"
+        android:tint="#050505"
+        app:backgroundTint="#FF0000"
+        app:rippleColor="#000000" />-->
+
+
+    <Button
+        android:id="@+id/alarm"
+        android:layout_width="330dp"
+        android:layout_height="337dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/round_button"
+        android:text="ALARM"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginVertical="@dimen/activity_vertical_margin"
+        android:background="@drawable/round_button_cancel"
+        android:textAlignment="center"
+        android:text="Cancel"
+        android:textColor="#000"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/settings"
+        android:layout_width="105dp"
+        android:layout_height="102dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:text="Settings" />
+
+    <Button
+        android:id="@+id/contacts"
+        android:layout_width="105dp"
+        android:layout_height="102dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:text="Contacts" />
+</RelativeLayout>

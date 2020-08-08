@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".intro.ui.home.RedButtonFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="72dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Безопасно"
+            android:textColor="#4CAF50"
+            android:textSize="24sp"
+            android:theme="@style/SCBSwitch"
+            android:thumbTint="#4CAF50"
+            android:trackTint="#4CAF50"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></androidx.appcompat.widget.SwitchCompat>
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/cancel_red_buttonwhite"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/textView15"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="28dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Отмена"
+            android:textColor="#F44336"
+            android:textSize="18sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:src="@drawable/red_button_new"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/switch1" />
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="29dp"
+            android:layout_height="29dp"
+            android:layout_marginBottom="4dp"
+            android:src="@drawable/settings"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.067"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.97" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

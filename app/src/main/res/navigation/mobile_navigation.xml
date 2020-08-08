@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.findmeby.client.intro.ui.home.HomeFragment"
+        android:label="Домашняя"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/contactsFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_redButtonFragment"
+            app:destination="@id/redButtonFragment" />
+    </fragment>>
+
+
+    <fragment
+        android:id="@+id/contactsFragment"
+        android:name="com.findmeby.client.intro.ui.home.ContactsFragment"
+        android:label="Контакты"
+        tools:layout="@layout/fragment_contacts">
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/nav_home" />
+        <action
+            android:id="@+id/action_SecondFragment_to_profileFragment2"
+            app:destination="@id/profileFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.findmeby.client.intro.ui.home.ProfileFragment"
+        android:label="Профиль"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment2_to_SecondFragment"
+            app:destination="@id/contactsFragment" />
+        <action
+            android:id="@+id/action_profileFragment2_to_geolocationFragment"
+            app:destination="@id/geolocationFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/geolocationFragment"
+        android:name="com.findmeby.client.intro.ui.home.GeolocationFragment"
+        android:label="Геолокация"
+        tools:layout="@layout/fragment_geolocation">
+        <action
+            android:id="@+id/action_geolocationFragment_to_profileFragment2"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_geolocationFragment_to_redButtonFragment"
+            app:destination="@id/redButtonFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/redButtonFragment"
+        android:name="com.findmeby.client.intro.ui.home.RedButtonFragment"
+        android:label="Тревога"
+        tools:layout="@layout/fragment_red_button" >
+        <action
+            android:id="@+id/action_redButtonFragment_to_contactsFragment"
+            app:destination="@id/contactsFragment" />
+    </fragment>
+
+</navigation>

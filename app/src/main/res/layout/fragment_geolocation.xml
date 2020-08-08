@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".intro.ui.home.GeolocationFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/button_first4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:backgroundTint="#2979FF"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/start"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="АКТИВИРОВАТЬ ГЕОЛОКАЦИЮ"
+            android:textAlignment="viewStart"
+            android:textColor="#0D0D0D"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="259dp"
+            android:layout_height="72dp"
+            android:fontFamily="@font/roboto"
+            android:text='Информация о местоположении будет передана нашему приложению только в режиме "Опасность"'
+            android:textAlignment="center"
+            android:textColor="#AAAAAA"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="316dp"
+            android:layout_height="85dp"
+            android:layout_marginTop="40dp"
+            android:width="250dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Активированная локация позволит нам оповестить доверенные контакты о Вашем местоположении"
+            android:textAlignment="center"
+            android:textColor="#616161"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/roboto_light"
+            android:text="4/4"
+            android:textColor="#616161"
+            app:layout_constraintBottom_toTopOf="@+id/button_first4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <RadioGroup
+            android:layout_width="290dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="30dp"
+            android:checkedButton="@id/radioButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.450"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView10">
+
+            <RadioButton
+                android:id="@+id/radioButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="#2979FF"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="left"
+                android:layoutDirection="rtl"
+                android:text="Да (Рекомендуется)"
+                android:textColor="#2979FF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="12dp"/>
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="#2979FF"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="left"
+                android:layoutDirection="rtl"
+                android:text="Нет"
+                android:textColor="#2979FF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </RadioGroup>
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="103dp"
+            android:layout_height="14dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/indicator4"
+            app:layout_constraintBottom_toTopOf="@+id/textView13"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
