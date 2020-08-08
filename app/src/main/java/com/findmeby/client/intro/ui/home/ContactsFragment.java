@@ -137,55 +137,10 @@ public class ContactsFragment extends Fragment {
                 } else {
                     SharedPreferencesHelper.setContacts(getActivity(), contactsSet);
 
-                    //String [] arrayOfContacts = SharedPreferencesHelper.getContacts(getActivity());
-                    String userId = SharedPreferencesHelper.generateUserId(getActivity());
-                    String userName = SharedPreferencesHelper.getUserName(getActivity());
-                    Log.d("Test" , userId);
-                    JSONObject object = new JSONObject();
-                    JSONArray contactsArray = new JSONArray();
-                    for (String s : contactsSet){
-                        if (!s.isEmpty()){
-                            contactsArray.put(s);
-                        }
-                    }
-                    try {
-                        object
-                                .put("accountToken", userId)
-                                .put("contacts", contactsArray)
-                                .put("messageText", "...")
-                                .put("userName", userName)
-                                .put("sendPeriodicGeoData", true)
-                                .put("letContactsSeeGeoHistory", true)
-                                .put("currentTimestamp", new Date().getTime());
-                    } catch (JSONException e) {
-                        Log.d("JSONFailed","JSONFailed");
-                    }
-
-                    Log.d("JSON", object.toString());
-                    Log.d("HTTP", "TryingToexecuteHTTP");
-                    new AsyncRequest().execute(object.toString());
-
-
                     NavHostFragment.findNavController(ContactsFragment.this)
                             .navigate(R.id.action_SecondFragment_to_profileFragment2);
                 }
             }
         });
-    }
-
-
-
-    class AsyncRequest extends AsyncTask<String, Integer, String> {
-        @Override
-        protected String doInBackground(String... arg) {
-            Log.d("DOInBG","TEST");
-            return FindMeHttpUtil.sendRequest("POST", "/api/v1/registerContacts", arg[0]);
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            Log.d("s","onPostExecute");
-            super.onPostExecute(s);
-        }
     }
 }

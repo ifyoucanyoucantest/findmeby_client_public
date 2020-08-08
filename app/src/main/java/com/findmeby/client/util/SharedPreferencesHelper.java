@@ -16,6 +16,7 @@ public class SharedPreferencesHelper {
     private static String geoProvidedPath = "com.example.myapplication.geoProvided";
     private static String navigateToPath = "com.example.myapplication.navigateTo";
     private static String alarmBodyPath = "com.example.myapplication.alarmBody";
+    private static String cancelAlarmBodyPath = "com.example.myapplication.cancelAlarmBody";
     private static String dangerModePath = "com.example.myapplication.dangerMode";
     private static String backGroundRunPath = "com.example.myapplication.backGroundRun";
 
@@ -105,6 +106,19 @@ public class SharedPreferencesHelper {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(alarmBodyPath, alarmBody);
+        editor.commit();
+    }
+
+    public static String getCancelAlarmBody(Context context) {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        String cancelAlarmBody = sharedPref.getString(cancelAlarmBodyPath,null);
+        return cancelAlarmBody;
+    }
+
+    public static void setCancelAlarmBody(Context context, String cancelAlarmBody) {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(cancelAlarmBodyPath, cancelAlarmBody);
         editor.commit();
     }
 

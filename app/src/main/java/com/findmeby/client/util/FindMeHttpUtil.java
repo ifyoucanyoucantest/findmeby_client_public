@@ -6,6 +6,8 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
 
+import com.findmeby.client.model.OfflineSendRequestType;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -16,15 +18,19 @@ import java.net.URL;
 
 public class FindMeHttpUtil {
 
-    public static String sendRequest(String method, String path, String body, Context context, boolean vibroNeeded, boolean saveIfFailedNeeded) {
-        return sendRequestInternal(method,path,body,context,vibroNeeded,saveIfFailedNeeded);
+    public static String sendRequestAlarm(String method, String path, String body, Context context, boolean vibroNeeded, boolean saveIfFailedNeeded) {
+        return sendRequestInternal(method,path,body,context,vibroNeeded,saveIfFailedNeeded, OfflineSendRequestType.ALARM);
     }
 
-    public static String sendRequest(String method, String path, String body) {
-        return sendRequestInternal(method,path,body,null,false, false);
+    public static String sendRequestCancelAlarm(String method, String path, String body, Context context, boolean vibroNeeded, boolean saveIfFailedNeeded) {
+        return sendRequestInternal(method,path,body,context,vibroNeeded,saveIfFailedNeeded, OfflineSendRequestType.CANCEL_ALARM);
     }
 
-    private static String sendRequestInternal(String method, String path, String body, Context context, boolean vibroNeeded, boolean saveIfFailedNeeded) {
+    public static String sendRequestAlarm(String method, String path, String body) {
+        return sendRequestInternal(method,path,body,null,false, false, OfflineSendRequestType.NO_OFFLINE_SUPPORTED);
+    }
+
+    private static String sendRequestInternal(String method, String path, String body, Context context, boolean vibroNeeded, boolean saveIfFailedNeeded, OfflineSendRequestType offlineSendRequestType) {
         Log.d("bodyForSending",body);
         URL url = null;
         try {
@@ -72,7 +78,11 @@ public class FindMeHttpUtil {
         catch (Exception e)
         {
             if(context != null && saveIfFailedNeeded) {
-                SharedPreferencesHelper.setAlarmBody(context,body);
+                if(offlineSendRequestType == OfflineSendRequestType.ALARM) {
+                    SharedPreferencesHelper.setAlarmBody(context, body);
+                } else if (offlineSendRequestType == OfflineSendRequestType.CANCEL_ALARM) {
+                    SharedPreferencesHelper.setCancelAlarmBody(context, body);
+                }
             }
             //Log.d("Exception",e.getStackTrace().toString());
             e.printStackTrace();

@@ -3,23 +3,16 @@ package com.findmeby.client.intro;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.VibrationEffect;
-import android.os.Vibrator;
 import android.util.Log;
 import android.view.Menu;
 
 import com.findmeby.client.R;
-import com.findmeby.client.receiver.ConnectionChangeReceiver;
-import com.findmeby.client.service.BackgroundOfflineService;
-import com.findmeby.client.service.RebuttonService;
 import com.findmeby.client.util.FindMeHttpUtil;
 import com.findmeby.client.util.SharedPreferencesHelper;
 import com.google.android.material.navigation.NavigationView;
@@ -47,6 +40,7 @@ public class IntroMainActivity extends AppCompatActivity implements ActivityComp
     private static int minMillisecondsPassed = 1000;
     private LocationManager locationManager;
     private Context context;
+    private String triggerToken;
 
 
     @Override
@@ -124,12 +118,17 @@ public class IntroMainActivity extends AppCompatActivity implements ActivityComp
     }
 
     public Location sendAlarmFromRedButton() {
+        triggerToken = java.util.UUID.randomUUID().toString();
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             return getLocation();
         } else {
             sendAlarmWithoutGeolocation();
             return null;
         }
+    }
+
+    public String getTriggerToken() {
+        return triggerToken;
     }
 
     public void sendAlarmWithoutGeolocation() {
@@ -145,7 +144,8 @@ public class IntroMainActivity extends AppCompatActivity implements ActivityComp
                             .put("lng", null)
                             .put("timestamp", new Date().getTime()))
                     .put("originalTimestamp",  new Date().getTime())
-                    .put("currentTimestamp", new Date().getTime());
+                    .put("currentTimestamp", new Date().getTime())
+                    .put("triggerToken", triggerToken);
         } catch (JSONException e) {
             Log.d("BackgroundTrigger","JSONFailed");
         }
@@ -202,7 +202,7 @@ public class IntroMainActivity extends AppCompatActivity implements ActivityComp
         @Override
         protected String doInBackground(String... arg) {
             Log.d("RedButtonAsyncRequest","BackGroundStarted");
-            return FindMeHttpUtil.sendRequest("POST", "/api/v1/triggerAlarm", arg[0], context, true, true);
+            return FindMeHttpUtil.sendRequestAlarm("POST", "/api/v1/triggerAlarm", arg[0], context, true, true);
         }
 
         @Override
@@ -226,7 +226,8 @@ public class IntroMainActivity extends AppCompatActivity implements ActivityComp
                             .put("lng", location == null ? null : location.getLongitude())
                             .put("timestamp", new Date().getTime()))
                     .put("originalTimestamp",  new Date().getTime())
-                    .put("currentTimestamp", new Date().getTime());
+                    .put("currentTimestamp", new Date().getTime())
+                    .put("triggerToken", triggerToken);
         } catch (JSONException e) {
             Log.d("BackgroundTrigger","JSONFailed");
         }

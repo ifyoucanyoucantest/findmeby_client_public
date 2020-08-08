@@ -9,10 +9,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.VibrationEffect;
-import android.os.Vibrator;
 import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
@@ -96,7 +93,8 @@ public class RedButtonAlarmReceiver extends BroadcastReceiver implements Locatio
                             .put("lng", null)
                             .put("timestamp", new Date().getTime()))
                     .put("originalTimestamp",  new Date().getTime())
-                    .put("currentTimestamp", new Date().getTime());
+                    .put("currentTimestamp", new Date().getTime())
+                    .put("triggerToken", java.util.UUID.randomUUID().toString());
         } catch (JSONException e) {
             Log.d("BackgroundTrigger","JSONFailed");
         }
@@ -169,7 +167,8 @@ public class RedButtonAlarmReceiver extends BroadcastReceiver implements Locatio
                             .put("lng", location == null ? null : location.getLongitude())
                             .put("timestamp", new Date().getTime()))
                     .put("originalTimestamp",  new Date().getTime())
-                    .put("currentTimestamp", new Date().getTime());
+                    .put("currentTimestamp", new Date().getTime())
+                    .put("triggerToken", java.util.UUID.randomUUID().toString());
         } catch (JSONException e) {
             Log.d("BackgroundTrigger","JSONFailed");
         }
@@ -200,7 +199,7 @@ public class RedButtonAlarmReceiver extends BroadcastReceiver implements Locatio
         @Override
         protected String doInBackground(String... arg) {
             Log.d("RedButtonAsyncRequest","BackGroundStarted");
-            return FindMeHttpUtil.sendRequest("POST", "/api/v1/triggerAlarm", arg[0], context, true, true);
+            return FindMeHttpUtil.sendRequestAlarm("POST", "/api/v1/triggerAlarm", arg[0], context, true, true);
         }
 
         @Override

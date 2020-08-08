@@ -3,13 +3,11 @@ package com.findmeby.client.receiver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.findmeby.client.util.FindMeHttpUtil;
 import com.findmeby.client.util.SharedPreferencesHelper;
@@ -34,6 +32,13 @@ public class ConnectionChangeReceiver extends BroadcastReceiver {
             {
                 SharedPreferencesHelper.setAlarmBody(context,"");
                 new AsyncRequest().execute(alarmBody,context);
+            }
+
+            String cancelAlarmBody = SharedPreferencesHelper.getCancelAlarmBody(context);
+            if(cancelAlarmBody != null && !cancelAlarmBody.isEmpty())
+            {
+                SharedPreferencesHelper.setCancelAlarmBody(context,"");
+                new CancelAlarmAsyncRequest().execute(cancelAlarmBody,context);
             }
         }
     }
@@ -63,7 +68,21 @@ public class ConnectionChangeReceiver extends BroadcastReceiver {
         @Override
         protected String doInBackground(Object... arg) {
             Log.d("RedButtonAsyncRequest","BackGroundStarted");
-            return FindMeHttpUtil.sendRequest("POST", "/api/v1/triggerAlarm", (String)arg[0], (Context) arg[1], true, true);
+            return FindMeHttpUtil.sendRequestAlarm("POST", "/api/v1/triggerAlarm", (String)arg[0], (Context) arg[1], true, true);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            Log.d("RedButtonAsyncRequest","onPostExecute");
+            super.onPostExecute(s);
+        }
+    }
+
+    class CancelAlarmAsyncRequest extends AsyncTask<Object, Integer, String> {
+        @Override
+        protected String doInBackground(Object... arg) {
+            Log.d("RedButtonAsyncRequest","BackGroundStarted");
+            return FindMeHttpUtil.sendRequestCancelAlarm("POST", "/api/v1/cancelAlarm", (String)arg[0], (Context) arg[1], false, true);
         }
 
         @Override

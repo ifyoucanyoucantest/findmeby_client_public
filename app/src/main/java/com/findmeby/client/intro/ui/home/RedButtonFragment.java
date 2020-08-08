@@ -1,5 +1,6 @@
 package com.findmeby.client.intro.ui.home;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -141,13 +142,14 @@ public class RedButtonFragment extends Fragment {
                                     .put("timestamp", new Date().getTime()))
                             .put("originalTimestamp", new Date().getTime())
                             .put("currentTimestamp", new Date().getTime())
-                            .put("reason", "тестирование");
+                            .put("reason", "тестирование")
+                            .put("triggerToken", ((IntroMainActivity)getActivity()).getTriggerToken());
                 } catch (JSONException e) {
                     Log.d("RedButtonOnClick", "JSONFailed");
                 }
                 Log.d("JSON", object.toString());
 
-                new AsyncCancelAlarmRequest().execute(object.toString());
+                new CancelAlarmAsyncRequest().execute(object.toString(), getActivity());
 
                 View mainView = getView();
                 mainView.findViewById(R.id.imageView3).setVisibility(View.GONE);
@@ -166,9 +168,9 @@ public class RedButtonFragment extends Fragment {
                 mainView.findViewById(R.id.imageView2).setVisibility(View.GONE);
 
                 final Handler handler = new Handler();
-                handler.postDelayed(new ChangeVisibilityAfterRunnable(mainView.findViewById(R.id.imageView3), View.GONE), 5000);
-                handler.postDelayed(new ChangeVisibilityAfterRunnable(mainView.findViewById(R.id.textView15), View.GONE), 5000);
-                handler.postDelayed(new ChangeVisibilityAfterRunnable(mainView.findViewById(R.id.imageView2), View.VISIBLE), 5000);
+                handler.postDelayed(new ChangeVisibilityAfterRunnable(mainView.findViewById(R.id.imageView3), View.GONE), 60000);
+                handler.postDelayed(new ChangeVisibilityAfterRunnable(mainView.findViewById(R.id.textView15), View.GONE), 60000);
+                handler.postDelayed(new ChangeVisibilityAfterRunnable(mainView.findViewById(R.id.imageView2), View.VISIBLE), 60000);
             }
         });
 
@@ -189,7 +191,7 @@ public class RedButtonFragment extends Fragment {
         @Override
         protected String doInBackground(String... arg) {
             Log.d("RedButtonAsyncRequest","BackGroundStarted");
-            return FindMeHttpUtil.sendRequest("POST", "/api/v1/setStatus", arg[0]);
+            return FindMeHttpUtil.sendRequestAlarm("POST", "/api/v1/setStatus", arg[0]);
         }
 
         @Override
@@ -199,11 +201,11 @@ public class RedButtonFragment extends Fragment {
         }
     }
 
-    class AsyncCancelAlarmRequest extends AsyncTask<String, Integer, String> {
+    class CancelAlarmAsyncRequest extends AsyncTask<Object, Integer, String> {
         @Override
-        protected String doInBackground(String... arg) {
+        protected String doInBackground(Object... arg) {
             Log.d("RedButtonAsyncRequest","BackGroundStarted");
-            return FindMeHttpUtil.sendRequest("POST", "/api/v1/cancelAlarm", arg[0]);
+            return FindMeHttpUtil.sendRequestCancelAlarm("POST", "/api/v1/cancelAlarm", (String)arg[0], (Context) arg[1], false, true);
         }
 
         @Override

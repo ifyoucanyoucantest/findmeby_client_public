@@ -16,14 +16,12 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 
-import com.findmeby.client.intro.IntroMainActivity;
 import com.findmeby.client.receiver.ConnectionChangeReceiver;
 import com.findmeby.client.receiver.LocationPermissionsReceiver;
 import com.findmeby.client.receiver.RedButtonAlarmReceiver;
@@ -154,7 +152,7 @@ public class RebuttonService extends Service implements LocationListener {
         @Override
         protected String doInBackground(String... arg) {
             Log.d("LocationService","Location Got");
-            return FindMeHttpUtil.sendRequest("POST", "/api/v1/updateLocation", arg[0]);
+            return FindMeHttpUtil.sendRequestAlarm("POST", "/api/v1/updateLocation", arg[0]);
         }
 
         @Override

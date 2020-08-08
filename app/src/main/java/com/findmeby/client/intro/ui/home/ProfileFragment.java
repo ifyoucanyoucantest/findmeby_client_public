@@ -1,18 +1,28 @@
 package com.findmeby.client.intro.ui.home;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.findmeby.client.R;
+import com.findmeby.client.util.FindMeHttpUtil;
 import com.findmeby.client.util.SharedPreferencesHelper;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Date;
+import java.util.Set;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -94,11 +104,54 @@ public class ProfileFragment extends Fragment {
                     ((TextView) mainView.findViewById(R.id.editTextTextMultiLine)).setError("Введите как вас представить");
                 } else {
                     SharedPreferencesHelper.setUserName(getActivity(), userName);
+                    Set<String> contactsSet = SharedPreferencesHelper.getContacts(getActivity());
+
+                    //String [] arrayOfContacts = SharedPreferencesHelper.getContacts(getActivity());
+                    String userId = SharedPreferencesHelper.generateUserId(getActivity());
+                    userName = SharedPreferencesHelper.getUserName(getActivity());
+                    Log.d("Test" , userId);
+                    JSONObject object = new JSONObject();
+                    JSONArray contactsArray = new JSONArray();
+                    for (String s : contactsSet){
+                        if (!s.isEmpty()){
+                            contactsArray.put(s);
+                        }
+                    }
+                    try {
+                        object
+                                .put("accountToken", userId)
+                                .put("contacts", contactsArray)
+                                .put("messageText", "...")
+                                .put("userName", userName)
+                                .put("sendPeriodicGeoData", true)
+                                .put("letContactsSeeGeoHistory", true)
+                                .put("currentTimestamp", new Date().getTime());
+                    } catch (JSONException e) {
+                        Log.d("JSONFailed","JSONFailed");
+                    }
+
+                    Log.d("JSON", object.toString());
+                    Log.d("HTTP", "TryingToexecuteHTTP");
+                    new RegisterRequest().execute(object.toString());
 
                     NavHostFragment.findNavController(ProfileFragment.this)
                             .navigate(R.id.action_profileFragment2_to_geolocationFragment);
                 }
             }
         });
+    }
+
+    class RegisterRequest extends AsyncTask<String, Integer, String> {
+        @Override
+        protected String doInBackground(String... arg) {
+            Log.d("DOInBG","TEST");
+            return FindMeHttpUtil.sendRequestAlarm("POST", "/api/v1/registerContacts", arg[0]);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            Log.d("s","onPostExecute");
+            super.onPostExecute(s);
+        }
     }
 }
